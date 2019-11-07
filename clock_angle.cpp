@@ -2,6 +2,11 @@
 #include <string>
 using namespace std;
 
+/*===========================\
+| Author: Gabrielle Panchev  |
+| Date: 11/4/2019            |
+| File Name: clock_angle.cpp |
+\===========================*/
  
 
 // prototypes:
@@ -71,7 +76,7 @@ bool getTime(string t, int *h, int *m)
 		else { goto Error; }
 	}
 
-	// Loop through string time
+	// Loop through string time to get hours and minutes
 	for (int i = 0; i < t.length(); i++)
 	{
 		if (t[i] == ':')
@@ -111,7 +116,6 @@ void getAngle(string *t, int h, int m)
 	double angleBetween = 0;
 	double minDegs = 0;
 	double hrDegs = 0;
-
 
 	// Get angle in degrees of minute hand by multiplying
 	// minutes by 6 (each minute is 6 degrees).
