@@ -56,8 +56,8 @@ bool getTime(string t, int *h, int *m)
 	// if time was entered in hours only, assume minutes == 0
 	if (t.length() <= 2)
 	{
-		if ((t.length() == 2 && isdigit(t[0]) && isdigit(t[1])) ||
-			t.length() == 1 && isdigit(t[0]))
+		if (((t.length() == 2 && isdigit(t[0]) && isdigit(t[1])) ||
+			(t.length() == 1 && isdigit(t[0]))) && stoi(t) > 0 && stoi(t) < 13)
 		{
 			if (t == "12")
 			{
@@ -76,7 +76,7 @@ bool getTime(string t, int *h, int *m)
 		else { goto Error; }
 	}
 
-	// Loop through string time to get hours and minutes
+	// Loop through string time
 	for (int i = 0; i < t.length(); i++)
 	{
 		if (t[i] == ':')
@@ -94,9 +94,16 @@ bool getTime(string t, int *h, int *m)
 		}
 		else { goto Error; }
 	}
-	if (stoi(tempHour) <= 12 && stoi(tempMin) < 60)
+
+ 
+	if (stoi(tempHour) < 12 && stoi(tempMin) < 60)
 	{
 		*h = stoi(tempHour);
+		*m = stoi(tempMin);
+	}
+	else if (stoi(tempHour) == 12 && stoi(tempMin) < 60)
+	{
+		*h = 0;
 		*m = stoi(tempMin);
 	}
 	else { goto Error; }
@@ -116,6 +123,7 @@ void getAngle(string *t, int h, int m)
 	double angleBetween = 0;
 	double minDegs = 0;
 	double hrDegs = 0;
+
 
 	// Get angle in degrees of minute hand by multiplying
 	// minutes by 6 (each minute is 6 degrees).
